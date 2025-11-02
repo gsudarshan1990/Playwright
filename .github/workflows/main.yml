@@ -1,0 +1,80 @@
+name: Playwright Tests
+
+# Controls when the workflow will run
+on:
+  # Triggers the workflow on push events for the "main" branch
+  push:
+    branches: [ "main" ]
+  
+  # Triggers the workflow on pull request events targeting the "main" branch
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  test:
+    name: Run Playwright Tests
+    # Use the latest available Ubuntu runner
+    runs-on: ubuntu-latest
+
+    # Define Node.js version to use
+    strategy:
+      matrix:
+        node-version: [ 20 ]
+
+    steps:
+    - name: Check out repository
+      # Checks out your repository's code so the job can access it
+      uses: actions/checkout@v4
+
+    - name: Set up Node.js
+      # Sets up the specified Node.js version
+      uses: actions/setup-node@v4
+      with:
+        node-version: ${{ matrix.node-version }}
+        cache: 'npm' # Enable caching for npm dependencies
+
+    # --- Run tests for the first project: PlaywrightBasicsTypeScript ---
+    - name: Install dependencies (PlaywrightBasicsTypeScript)
+      # Sets the working directory for this step
+      working-directory: ./PlaywrightBasicsTypeScript
+      run: npm install
+
+    - name: Install Playwright browsers (PlaywrightBasicsTypeScript)
+      working-directory: ./PlaywrightBasicsTypeScript
+      # Installs browsers and system dependencies
+      run: npx playwright install --with-deps
+
+    - name: Run Playwright tests (PlaywrightBasicsTypeScript)
+      working-directory: ./PlaywrightBasicsTypeScript
+      run: npx playwright test
+
+    - name: Upload report (PlaywrightBasicsTypeScript)
+      # This step only runs if the previous steps (tests) failed
+      if: failure()
+      uses: actions/upload-artifact@v4
+      with:
+        name: playwright-report-basics
+        path: PlaywrightBasicsTypeScript/playwright-report/
+        retention-days: 30 # Keep the report for 30 days
+
+    # --- Run tests for the second project: playwrightdemo ---
+    - name: Install dependencies (playwrightdemo)
+      working-directory: ./playwrightdemo
+      run: npm install
+
+    - name: Install Playwright browsers (playwrightdemo)
+      working-directory: ./playwrightdemo
+      run: npx playwright install --with-deps
+
+    - name: Run Playwright tests (playwrightdemo)
+      working-directory: ./playwrightdemo
+      run: npx playwright test
+
+    - name: Upload report (playwrightdemo)
+      # This step only runs if the previous steps (tests) failed
+      if: failure()
+      uses: actions/upload-artifact@v4
+      with:
+        name: playwright-report-demo
+        path: playwrightdemo/playwright-report/
+        retention-days: 30
