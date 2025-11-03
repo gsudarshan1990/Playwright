@@ -4,11 +4,11 @@ name: Playwright Tests
 on:
   # Triggers the workflow on push events for the "main" branch
   push:
-    branches: [ "main" ,"playwrightbranch2" ]
+    branches: [ "master" , "playwrightbranch2" ]
   
   # Triggers the workflow on pull request events targeting the "main" branch
   pull_request:
-    branches: [ "main" ]
+    branches: [ "master" ]
 
 jobs:
   test:
