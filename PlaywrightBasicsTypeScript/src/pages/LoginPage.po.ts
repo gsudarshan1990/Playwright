@@ -22,4 +22,10 @@ export class LoginPage
         await this.page.getByRole('button', {name:'Login'}).click();
     }
     
+    async loginWithInvalidCredentials(email:string, password:string )
+    {
+        await this.page.getByPlaceholder('Your email').fill(email);
+        await this.page.getByPlaceholder('Your password').fill(password);
+        await this.page.getByRole('button', {name:'Login'}).click();
+    }
 }
