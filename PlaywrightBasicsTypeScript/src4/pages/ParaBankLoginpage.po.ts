@@ -1,4 +1,5 @@
 import {Page, Locator} from '@playwright/test';
+import { ParaBankEnterDetails, ParaBankClick } from '../Helper/CommonHelper';
 
 export class ParaBankLoginPage
 {
@@ -21,11 +22,11 @@ export class ParaBankLoginPage
         await this.page.waitForLoadState('load');
     }
 
-    async BankLogin(username : string, password : string)
+    async BankLogin(pusername : string, ppassword : string)
     {
-       
-        await this.username.fill(username);
-        await this.password.fill(password);
-        await this.LoginButton.click();
+      await ParaBankEnterDetails(this.page, this.username,pusername);
+      await ParaBankEnterDetails(this.page, this.password, ppassword);
+      await ParaBankClick(this.LoginButton); 
+      
     }
 }

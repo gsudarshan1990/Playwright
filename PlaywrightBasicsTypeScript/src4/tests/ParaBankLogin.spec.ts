@@ -7,8 +7,8 @@ test('Login to the bank account', async({page})=>{
         await parabankloginpage.navigate();
         await page.waitForSelector("input[name='username']");
         await page.waitForTimeout(2000);
-        await parabankloginpage.BankLogin('john','demo');
+        await parabankloginpage.BankLogin('mark_test_001','rahul');
         await page.waitForTimeout(5000);
-        //await expect(page).toHaveURL('https://parabank.parasoft.com/parabank/overview.htm');
+        await expect(page).toHaveURL('https://parabank.parasoft.com/parabank/overview.htm');
 
 });
