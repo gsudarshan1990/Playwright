@@ -1,5 +1,5 @@
 import {test, expect} from '@playwright/test';
-import { SauceDemoLoginPage } from '../pages/saucedemoLoginPage.po';
+import { SauceDemoLoginPage } from '../pages/SauceDemoLoginPage.po';
 
 test('test saucedemo login', async({page})=>{
     const saucedemologinobj = new SauceDemoLoginPage(page);
