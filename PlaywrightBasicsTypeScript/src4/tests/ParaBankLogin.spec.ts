@@ -9,7 +9,7 @@ test.beforeEach(async({page})=>{
         const parabankloginpage = new ParaBankLoginPage(page);
         await parabankloginpage.navigate();
         await page.waitForSelector("input[name='username']");
-        await parabankloginpage.BankLogin('mark_test_2025_009','suresh08');
+        await parabankloginpage.BankLogin('mark_test_2025_012','suresh08');
         await page.waitForLoadState('load');
 
 });
@@ -40,7 +40,7 @@ test('Navigate to pages after Login',async({page})=>{
         await page.waitForTimeout(2000);
 });
 
-test.only('Navigate to Open New Account Page',async({page})=>{
+test('Navigate to Open New Account Page',async({page})=>{
         accountoverview = new AccountsOverview(page);
         await accountoverview.navigateToNewAccount();
         await page.waitForSelector('#rightPanel>div>#openAccountForm>form>select#type');
