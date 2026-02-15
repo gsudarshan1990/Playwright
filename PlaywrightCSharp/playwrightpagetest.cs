@@ -37,13 +37,13 @@ namespace Playwright_Practice
 						
 			var header =  _page.GetByRole(AriaRole.Heading, new() { Name = "Installation" });
 
-			await header.WaitForAsync(new LocatorWaitForOptions { State = WaitForSelectorState.Visible });
+			await _page.WaitForLoadStateAsync(LoadState.NetworkIdle);
 
 			Assert.True(await header.IsVisibleAsync());
 
 			await _page.GetByRole(AriaRole.Link, new() { Name = "Getting started - VS Code" }).ClickAsync();
 
-			await _page.WaitForLoadStateAsync(LoadState.DOMContentLoaded);
+			await _page.WaitForLoadStateAsync(LoadState.NetworkIdle);
 
 			string url = _page.Url;
 
