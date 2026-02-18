@@ -1,5 +1,5 @@
 {
-  "name": "playwrightbasicstypescript",
+  "name": "playwrightbasics",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -10,9 +10,6 @@
   "type": "commonjs",
   "devDependencies": {
     "@playwright/test": "^1.56.1",
-    "@types/node": "^24.10.1"
-  },
-  "dependencies": {
-    "typescript": "^5.9.3"
+    "@types/node": "^24.9.1"
   }
 }
