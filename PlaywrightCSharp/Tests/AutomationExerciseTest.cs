@@ -21,6 +21,8 @@ namespace Playwright_Practice.Tests
 
 		private AutomationExercisePage _automationExercisePage = null!;
 
+		private ProductsPage _productsPage = null!;
+
 		public async Task InitializeAsync()
 		{
 			_playwright = await Playwright.CreateAsync();
@@ -54,6 +56,20 @@ namespace Playwright_Practice.Tests
 		await _automationExercisePage.enterEmail("abcdef@gmail.com");
 		await _automationExercisePage.ClickEmailSubscription();
 		await Expect(_automationExercisePage.returnAlertMessageLocator()).ToBeVisibleAsync();
+	}
+
+	[Fact]
+
+	public async Task ClickProductsLink()
+	{
+		await _page.GotoAsync(url);
+		_automationExercisePage = new AutomationExercisePage(_page);
+		await _automationExercisePage.ClickProducts();
+		_productsPage = new ProductsPage(_page);
+		await _productsPage.EnterSearchProduct("TShirt");
+		await _productsPage.ClickSearch();
+		await Expect(_productsPage.returnText()).ToBeVisibleAsync();
+
 	}
 
 		public async Task DisposeAsync()
