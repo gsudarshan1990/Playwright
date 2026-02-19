@@ -19,6 +19,12 @@ namespace Playwright_Practice.pages
 
 		private ILocator _saree = null!;
 
+		private ILocator _email = null!;
+
+		private ILocator _emailSubmissionButton = null!;
+
+		private ILocator _alertSuccess = null!;
+
 		public AutomationExercisePage(IPage _page)
 		{
 			_image = _page.Locator(".pull-left img");
@@ -32,6 +38,12 @@ namespace Playwright_Practice.pages
 			_tops = _page.GetByRole(AriaRole.Link, new() { Name = "TOPS" });
 
 			_saree = _page.GetByRole(AriaRole.Link, new() { Name = "SAREE" });
+
+			_email = _page.Locator("#susbscribe_email");
+
+			_emailSubmissionButton = _page.Locator("#subscribe");
+
+			_alertSuccess = _page.Locator("#success-subscribe");	
 		}
 
 
@@ -65,6 +77,21 @@ namespace Playwright_Practice.pages
 		public ILocator returnSaree()
 		{
 			return _saree;
+		}
+
+		public async Task enterEmail(string emailid)
+		{
+			await _email.FillAsync(emailid);
+		}
+
+		public async Task ClickEmailSubscription()
+		{
+			await _emailSubmissionButton.ClickAsync();
+		}
+
+		public ILocator returnAlertMessageLocator()
+		{
+			return _alertSuccess;
 		}
 	}
 }

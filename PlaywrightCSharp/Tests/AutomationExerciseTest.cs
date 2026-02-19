@@ -46,10 +46,21 @@ namespace Playwright_Practice.Tests
 			await Expect(_automationExercisePage.returnSaree()).ToBeVisibleAsync();
 		}
 
-		public async Task DisposeAsync()
-		{
+		[Fact]
+		public async Task EmailSubscription ()
+	{
+		await _page.GotoAsync(url);
+		_automationExercisePage = new AutomationExercisePage(_page);
+		await _automationExercisePage.enterEmail("abcdef@gmail.com");
+		await _automationExercisePage.ClickEmailSubscription();
+		await Expect(_automationExercisePage.returnAlertMessageLocator()).ToBeVisibleAsync();
+	}
 
-		}
+		public async Task DisposeAsync()
+	{
+		await _browser.DisposeAsync();
+		_playwright.Dispose();
+	}	
 
 
 	}
