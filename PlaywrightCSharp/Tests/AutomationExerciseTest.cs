@@ -32,14 +32,16 @@ namespace Playwright_Practice.Tests
 			_browser = await _playwright.Chromium.LaunchAsync(_launchOptions);
 
 			_page = await _browser.NewPageAsync();
+
+			await _page.GotoAsync(url);
+			_automationExercisePage = new AutomationExercisePage(_page);
 		}
 
 		[Fact]
 
 		public async Task TestHomePageNavigation()
 		{
-			await _page.GotoAsync(url);
-			_automationExercisePage = new AutomationExercisePage(_page);
+			
 			await Expect(_automationExercisePage.returnImage()).ToBeVisibleAsync();
 			await Expect(_automationExercisePage.returnFeatureItems()).ToHaveTextAsync("Features Items");
 			await _automationExercisePage.clickWomen();
@@ -51,8 +53,6 @@ namespace Playwright_Practice.Tests
 		[Fact]
 			public async Task EmailSubscription ()
 		{
-			await _page.GotoAsync(url);
-			_automationExercisePage = new AutomationExercisePage(_page);
 			await _automationExercisePage.enterEmail("abcdef@gmail.com");
 			await _automationExercisePage.ClickEmailSubscription();
 			await Expect(_automationExercisePage.returnAlertMessageLocator()).ToBeVisibleAsync();
@@ -62,8 +62,6 @@ namespace Playwright_Practice.Tests
 
 		public async Task ClickProductsLink()
 		{
-			await _page.GotoAsync(url);
-			_automationExercisePage = new AutomationExercisePage(_page);
 			await _automationExercisePage.ClickProducts();
 			_productsPage = new ProductsPage(_page);
 			await _productsPage.EnterSearchProduct("TShirt");
@@ -75,8 +73,6 @@ namespace Playwright_Practice.Tests
 
 		public async Task ClickAddToCart()
 		{
-			await _page.GotoAsync(url);
-			_automationExercisePage = new AutomationExercisePage(_page);
 			await _automationExercisePage.AddToCartProduct();
 			await Task.Delay(5000);
 		}
@@ -85,8 +81,6 @@ namespace Playwright_Practice.Tests
 
 		public async Task FillContactUsForm()
 		{
-			await _page.GotoAsync(url);
-			_automationExercisePage = new AutomationExercisePage(_page);
 			await _automationExercisePage.ClickContactUs();
 			_contactUsPage = new ContactUsPage(_page);
 			await _contactUsPage.ContactUsFormFilling("Rajesh", "Rajesh@gmail.com", "Inquiry Regarding Services");
