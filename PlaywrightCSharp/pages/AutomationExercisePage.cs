@@ -24,6 +24,14 @@ namespace Playwright_Practice.pages
 		private ILocator _emailSubmissionButton = null!;
 
 		private ILocator _alertSuccess = null!;
+		
+		productsLink = _page.GetByRole(AriaRole.Link, new() { Name = "Products" });
+
+		_contactUsLink = _page.GetByRole(AriaRole.Link, new() { Name = "Contact us" });
+
+		_mensTshirt = _page.Locator(".features_items .product-image-wrapper").Nth(1);
+
+		_mensTshirtAddToCart = _page.Locator(" .overlay-content > a").Nth(1);
 
 		public AutomationExercisePage(IPage _page)
 		{
@@ -93,5 +101,21 @@ namespace Playwright_Practice.pages
 		{
 			return _alertSuccess;
 		}
+
+		public async Task ClickProducts()
+{
+	await _productsLink.ClickAsync();
+}
+
+public async Task ClickContactUs()
+{
+	await _contactUsLink.ClickAsync();
+}
+
+public async Task AddToCartProduct()
+{
+	await _mensTshirt.HoverAsync();
+	await _mensTshirtAddToCart.ClickAsync();
+}
 	}
 }
