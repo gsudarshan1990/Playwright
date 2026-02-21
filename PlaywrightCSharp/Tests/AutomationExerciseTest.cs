@@ -4,26 +4,31 @@ using System.Text;
 using Microsoft.Playwright;
 using Playwright_Practice.pages;
 using static Microsoft.Playwright.Assertions;
+using Playwright_Practice.Tests;
 
 namespace Playwright_Practice.Tests
 {
 	public class AutomationExerciseTest : IAsyncLifetime
 	{
-		private IPlaywright _playwright = null!;
+		protected IPlaywright _playwright = null!;
 
-		private BrowserTypeLaunchOptions _launchOptions = null!;
+		protected BrowserTypeLaunchOptions _launchOptions = null!;
 
-		private IBrowser _browser = null!;
+		public IBrowser _browser = null!;
 
-		private IPage _page = null!;
+		protected IPage _page = null!;
 
-		private string url = "https://automationexercise.com/";
+		protected string url = "https://automationexercise.com/";
 
+		
 		private AutomationExercisePage _automationExercisePage = null!;
 
 		private ProductsPage _productsPage = null!;
 
-		public async Task InitializeAsync()
+		private ContactUsPage _contactUsPage = null!;
+
+
+		public  async Task InitializeAsync()
 		{
 			_playwright = await Playwright.CreateAsync();
 
@@ -32,27 +37,29 @@ namespace Playwright_Practice.Tests
 			_browser = await _playwright.Chromium.LaunchAsync(_launchOptions);
 
 			_page = await _browser.NewPageAsync();
+
+			await _page.GotoAsync(url);
+			_automationExercisePage = new AutomationExercisePage(_page);
+
 		}
 
 		[Fact]
 
 		public async Task TestHomePageNavigation()
 		{
-			await _page.GotoAsync(url);
-			_automationExercisePage = new AutomationExercisePage(_page);
+			
 			await Expect(_automationExercisePage.returnImage()).ToBeVisibleAsync();
 			await Expect(_automationExercisePage.returnFeatureItems()).ToHaveTextAsync("Features Items");
 			await _automationExercisePage.clickWomen();
 			await Expect(_automationExercisePage.returnDress()).ToBeVisibleAsync();
 			await Expect(_automationExercisePage.returnTops()).ToBeVisibleAsync();
 			await Expect(_automationExercisePage.returnSaree()).ToBeVisibleAsync();
+			
 		}
 
 		[Fact]
-			public async Task EmailSubscription ()
+		public async Task EmailSubscription ()
 		{
-			await _page.GotoAsync(url);
-			_automationExercisePage = new AutomationExercisePage(_page);
 			await _automationExercisePage.enterEmail("abcdef@gmail.com");
 			await _automationExercisePage.ClickEmailSubscription();
 			await Expect(_automationExercisePage.returnAlertMessageLocator()).ToBeVisibleAsync();
@@ -62,8 +69,6 @@ namespace Playwright_Practice.Tests
 
 		public async Task ClickProductsLink()
 		{
-			await _page.GotoAsync(url);
-			_automationExercisePage = new AutomationExercisePage(_page);
 			await _automationExercisePage.ClickProducts();
 			_productsPage = new ProductsPage(_page);
 			await _productsPage.EnterSearchProduct("TShirt");
@@ -71,22 +76,19 @@ namespace Playwright_Practice.Tests
 			await Expect(_productsPage.returnText()).ToBeVisibleAsync();
 
 		}
+
 		[Fact]
 
 		public async Task ClickAddToCart()
 		{
-			await _page.GotoAsync(url);
-			_automationExercisePage = new AutomationExercisePage(_page);
 			await _automationExercisePage.AddToCartProduct();
-			await Task.Delay(5000);
+			await Task.Delay(1000);
 		}
 
 		[Fact]
 
 		public async Task FillContactUsForm()
 		{
-			await _page.GotoAsync(url);
-			_automationExercisePage = new AutomationExercisePage(_page);
 			await _automationExercisePage.ClickContactUs();
 			_contactUsPage = new ContactUsPage(_page);
 			await _contactUsPage.ContactUsFormFilling("Rajesh", "Rajesh@gmail.com", "Inquiry Regarding Services");
@@ -94,12 +96,11 @@ namespace Playwright_Practice.Tests
 
 		}
 
-
-			public async Task DisposeAsync()
+		public  async Task DisposeAsync()
 		{
 			await _browser.DisposeAsync();
 			_playwright.Dispose();
-		}	
+		}
 
 
 	}
