@@ -18,6 +18,17 @@ namespace Playwright_Practice.pages
 
 		private ILocator _searchedProductText => _page.GetByText("Searched Products");
 
+		private ILocator _firstproduct => _page.Locator(".features_items .product-image-wrapper").Nth(2);
+
+		private ILocator _firstProductAddToCart => _page.Locator(".overlay-content a").Nth(2);
+		private ILocator _secondProduct => _page.Locator(".features_items .product-image-wrapper").Nth(4);
+		
+		private ILocator _SecondProductAddToCart => _page.Locator(".overlay-content a").Nth(4);
+
+		private ILocator _ContinueShopping => _page.GetByRole(AriaRole.Button, new() { NameString = "Continue Shopping" });
+
+		private ILocator _viewCartPage => _page.GetByRole(AriaRole.Link, new() { NameString = "View Cart" });
+				
 		public async Task EnterSearchProduct(string data)
 		{
 			await _searchProductTextBox.FillAsync(data);
@@ -33,6 +44,17 @@ namespace Playwright_Practice.pages
 			return _searchedProductText;
 		}
 
+		public async Task ClickTwoProducts()
+		{
+			await _firstproduct.HoverAsync();
+			await _firstProductAddToCart.ClickAsync();
+			await _ContinueShopping.ClickAsync();
+			await _secondProduct.HoverAsync();
+			await _SecondProductAddToCart.ClickAsync();
+			await _viewCartPage.ClickAsync();
+			
+		}
+					
 
 	}
 }
