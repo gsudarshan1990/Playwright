@@ -26,13 +26,20 @@ namespace Playwright_Practice.pages
 
 		private ILocator _successMessage => _page.Locator(".contact-form>div").Nth(1);
 
+		private ILocator _successMessageText => _page.Locator("#contact-page").GetByText("Success! Your details have been submitted successfully.");
+
 		public async Task ContactUsFormFilling(string name, string emailid,string subject)
 		{
-			await _name.FillAsync(name);
-			await _email.FillAsync(emailid);
+			var time = DateTime.Now.ToString("yyyyMMddHHmmss");
+			await _name.FillAsync(name+time);
+			await _email.FillAsync(emailid+time);
 			await _subject.FillAsync(subject);
 			await _message.FillAsync("Hello,\r\nI would like to get more information about your services and pricing details. Please let me know the next steps and any required documentation.\r\n\r\nThank you for your time.\r\nBest regards,Rajesh");
 			await _page.Locator("textarea").PressAsync("Tab");
+			var filename = "test_file.txt";
+			await File.WriteAllTextAsync(filename, "Hello World!");
+			await _page.SetInputFilesAsync("input[name='upload_file']", filename);
+			await Task.Delay(2000);
 			_page.Dialog += async (_, dialog) =>
 			{
 				await dialog.AcceptAsync();
@@ -46,7 +53,10 @@ namespace Playwright_Practice.pages
 		{
 			return _successMessage;
 		}
-
-
+		
+		public ILocator ReturnSuccessText()
+		{
+			return _successMessageText;
+		}
 	}
 }
