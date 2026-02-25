@@ -71,8 +71,7 @@ namespace Playwright_Practice.Tests
 		{
 			await _automationExercisePage.ClickProducts();
 			_productsPage = new ProductsPage(_page);
-			await _productsPage.EnterSearchProduct("TShirt");
-			await _productsPage.ClickSearch();
+			await _productsPage.EnterAndSearchProduct("TShirt");
 			await Expect(_productsPage.returnText()).ToBeVisibleAsync();
 
 		}

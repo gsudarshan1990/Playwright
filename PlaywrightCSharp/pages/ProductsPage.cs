@@ -28,14 +28,11 @@ namespace Playwright_Practice.pages
 		private ILocator _ContinueShopping => _page.GetByRole(AriaRole.Button, new() { NameString = "Continue Shopping" });
 
 		private ILocator _viewCartPage => _page.GetByRole(AriaRole.Link, new() { NameString = "View Cart" });
-				
-		public async Task EnterSearchProduct(string data)
+
+		private ILocator _verifyJeans => _page.Locator(".features_items .product-image-wrapper");
+		public async Task EnterAndSearchProduct(string data)
 		{
 			await _searchProductTextBox.FillAsync(data);
-		}
-
-		public async Task ClickSearch()
-		{
 			await _searchButton.ClickAsync();
 		}
 
@@ -54,7 +51,20 @@ namespace Playwright_Practice.pages
 			await _viewCartPage.ClickAsync();
 			
 		}
+
+		
+		public async Task ClickOneProducts()
+		{
+			await _firstproduct.HoverAsync();
+			await _firstProductAddToCart.ClickAsync();
+			await _viewCartPage.ClickAsync();
+			
+		}
 					
+		public ILocator verifyJeans()
+		{
+			return _verifyJeans;
+		}
 
 	}
 }
