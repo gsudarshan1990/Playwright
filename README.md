@@ -97,10 +97,14 @@ Single tests : `dotnet test --filter "XunitBasics.CalculatorTest.cs"`
 
 Single tests with ITestOutputHelper: `dotnet test --filter "XunitBasics.ConsoleRunTests.cs" --logger "console;verbosity=detailed"`
 
-Key Files
+# Key Files
 
-tests/: This directory contains all test specification (.spec.ts) files.
+**tests/**: This directory contains all test specification (.spec.ts) files.
 
-playwright.config.ts: The primary configuration file for Playwright. This file defines project-level settings, browser configurations (Chromium, Firefox, WebKit), test timeouts, and reporter options.
+**playwright.config.ts**: The primary configuration file for Playwright. This file defines project-level settings, browser configurations (Chromium, Firefox, WebKit), test timeouts, and reporter options.
 
-package.json: Defines the project's Node.js dependencies, including the Playwright framework itself.
+**pages/**: (Within PlaywrightCSharp) Contains reusable Page Object classes.
+
+**Playwright_Practice.csproj**: Project configuration for C# automation.
+
+**package.json** : Defines the project's Node.js dependencies, including the Playwright framework itself.
