@@ -75,7 +75,3 @@ string projectName = "ACME";
 string message6 = $@"C:\Exercise\{projectName}\data.txt";
 Console.WriteLine($"View English output:\n\t{message6}");
 
-
-
-
-
