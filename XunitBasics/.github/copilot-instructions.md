@@ -56,3 +56,13 @@ applyTo : **/*.cs
 - Mock external dependencies; test the unit in isolation.
 - Verify mock interactions only when behavior testing is necessary.
 - Keep mocks simple and focused on the specific test scenario.
+
+## Commit Message Guidelines
+- Use present tense and imperative mood (e.g., "Add", "Fix", "Refactor").
+- Include a brief description of the change and its purpose.
+- Reference related issues or pull requests when applicable.
+- Example: "Add unit tests for UserService - resolves #123"
+- Example: "Refactor test setup to use IAsyncLifetime for better async handling"
+[Subject] No more than 75 characters
+[Body] Put changes in at most five bullet points: each point no more than 100 characters
+[Footer] Include a signature. Changes made by Sudarshan
