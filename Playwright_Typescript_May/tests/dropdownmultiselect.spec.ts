@@ -1,8 +1,13 @@
 import {test,expect} from '@playwright/test'
 
+test.beforeEach(async ({page})=>{
+
+     await page.goto('https://vinothqaacademy.com/drop-down/', {waitUntil:'domcontentloaded'})
+})
+
 test('Dropdown', async ({page})=>{
 
-    await page.goto('https://vinothqaacademy.com/drop-down/', {waitUntil:'domcontentloaded'})
+   
 
     await page.locator('#FromAccount').scrollIntoViewIfNeeded()
 
@@ -25,9 +30,9 @@ test('Dropdown', async ({page})=>{
     await page.waitForTimeout(2000)
 })
 
-test.only('Mult Select', async ({page})=>{
+test('Mult Select', async ({page})=>{
 
-    await page.goto('https://vinothqaacademy.com/drop-down/', {waitUntil:'domcontentloaded'})
+    
 
     const multiselect  = page.locator("select[name='programming']")
 
