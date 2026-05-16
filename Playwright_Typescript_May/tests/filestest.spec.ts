@@ -40,7 +40,7 @@ test('multiple files upload and deselect', async ({page})=>{
 
     uploadmultiplefile.scrollIntoViewIfNeeded()
 
-    await uploadmultiplefile.setInputFiles([path.join('C:/Users/LENOVO/OneDrive/Desktop/Copilot Agent/playwright_practice/Playwright_Typescript_May/multiple.txt'),path.join('C:/Users/LENOVO/OneDrive/Desktop/Copilot Agent/playwright_practice/Playwright_Typescript_May/first.txt')])
+    await uploadmultiplefile.setInputFiles([path.join('XXXXX'),path.join('XXXXX1')]) // XXXX shoule be the absolute path
 
     const uploadmultiplefiles   = page.getByRole('button',{'name':'Upload Multiple Files'})
 
