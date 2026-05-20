@@ -24,3 +24,12 @@ test.describe('Login to the sauce demo',()=>{
         expect (page.getByText('Epic sadface: Sorry, this user has been locked out.')).toBeVisible()
     })
 })
+
+
+test.describe('Grouping tests',()=>{
+
+    test('Runs while calling the group', ()=>{
+        console.log("Running via group command")
+        //npx playwright test -g "Grouping tests" --project=chromium
+    })
+})
