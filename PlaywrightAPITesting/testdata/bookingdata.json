@@ -1,0 +1,24 @@
+[
+    {
+    "firstname" : "Virat",
+    "lastname" : "Kohli",
+    "totalprice" : 200,
+    "depositpaid" : true,
+    "bookingdates" : {
+        "checkin" : "2026-02-05",
+        "checkout" : "2026-02-08"
+    },
+    "additionalneeds" : "Breakfast"
+},
+{
+    "firstname" : "Rahul",
+    "lastname" : "Dravid",
+    "totalprice" : 300,
+    "depositpaid" : true,
+    "bookingdates" : {
+        "checkin" : "2026-01-04",
+        "checkout" : "2026-01-07"
+    },
+    "additionalneeds" : "Lunch"
+}
+]
